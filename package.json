@@ -1,0 +1,18 @@
+{
+  "name": "sql_and_node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "node-testing-server": "^1.3.3",
+    "pg": "^7.18.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jasmine"
+  },
+  "keywords": [],
+  "author": "Thulani Khoza",
+  "license": "ISC"
+}
