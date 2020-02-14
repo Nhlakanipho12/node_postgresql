@@ -1,40 +1,77 @@
 
 const {createTable,addNewVisitor,viewAllVisitors,updateVisitor,deleteVisitor,viewVisitor,deleteAllVisitors} = require('../src/index');
 
-describe('createTable', () => {
-    it('should create the table in the database', async (done) => {
-      const res = await createTable('visitors');
-       //expect(valueOf.res).toEqual(1);
-       //console.log(res);
-      done();
-    });
+describe('bd', () => {
+  //drops a table if it exixts, then create a new one
+  beforeAll(async function() {
+    await createTable();
+
+
   });
-  
-  describe('addNewVisitor', () => {
-    it('should insert and save data into the table', async (done) => {
-      const res = await addNewVisitor('Tadiwa Zingoni',21,'2020-02-10','11:30','Melusi','No comments');
-      expect(Object.values(res[0])).toContain('Tadiwa Zingoni',21,'2020-02-10','11:30','Melusi','No comments');
-      done();
-    });
-  });
-  
-  
-  describe('viewVisitor', () => {
-  it('should select items from the table', async (done) => {
-    const res = await viewVisitor(1);
-    //console.log(Object.values(res[0]));
-    expect(res).toEqual([{ id: 1, visitor_name: 'Tadiwa Zingoni', visitor_age: 21, date_of_visit: '2020-02-10', time_of_visit: '11:30:00', assistant: 'Melusi', comments: 'No comments' }]);
-    done();
-  })
+  afterEach(async function() {
+    await addNewVisitor();
+    await viewVisitor();
+    await viewAllVisitors();
   });
 
-  describe('viewAllVisitors', () => {
-    it('should display visitor id and name', async (done) => {
-      const res = await viewAllVisitors();
-      expect(res).toEqual( [ { id: 1, visitor_name: 'Tadiwa Zingoni' } ]);
-      done();
-    });
+  afterAll( async function() {
+    await deleteVisitor();
+    await deleteAllVisitors();
 
   });
 
-  describe
+    //inserts data to the newly created table
+    describe('addNewVisitor', () => {
+
+      it('should insert and save data into the table', async (done) => {
+        const res = await addNewVisitor('Tadiwa Zingoni',21,'2020-02-10','11:30','Melusi','No comments');
+        expect(Object.values(res[0])).toContain('Tadiwa Zingoni',21,'2020-02-10','11:30','Melusi','No comments');
+        done();
+      });
+    });
+    
+    //displays visitor's info by selecting user ID
+    describe('viewVisitor', () => {
+    it('should select user id and display visitor info  from the table', async (done) => {
+      const res = await viewVisitor(1);
+      expect(res).toEqual([{ id: 1, visitor_name: 'Tadiwa Zingoni', visitor_age: 21, date_of_visit: '2020-02-10', time_of_visit: '11:30:00', assistant: 'Melusi', comments: 'No comments' }]);
+      done();
+    })
+    });
+    // displays visitor ID and name
+    describe('viewAllVisitors', () => {
+      it('should display visitor id and name', async (done) => {
+        const res = await viewAllVisitors();
+        expect(res).toEqual(Object.values(res));
+        done();
+      });
+  
+    });
+    //uses visitor ID to to update info
+    describe('updateVisitor', () => {
+      it('should update data by selecting the visitor id', async (done) => {
+        const res = await updateVisitor(1,'Senzo Meyiwa',21,'2020-02-10','11:30','Melusi','No comments');
+        expect(res).toEqual([{ id: 1, visitor_name: 'Senzo Meyiwa', visitor_age: 21, date_of_visit: '2020-02-10', time_of_visit: '11:30:00', assistant: 'Melusi', comments: 'No comments' }]);
+        done();
+      });
+    });
+  
+    describe('deleteVisitor', () => {
+      it('should delete visitor', async (done) => {
+        const res  = await deleteVisitor('Senzo Meyiwa');
+        expect(res).toEqual([ ]);
+        done();
+      });
+    });
+  
+    describe('deleteAllVisitors', () => {
+      it('should delete all visitors', async (done) => {
+        const res  = await deleteAllVisitors();
+        expect(res.rowCount).toEqual(0);
+        done();
+      });
+    });
+
+
+  });
+
