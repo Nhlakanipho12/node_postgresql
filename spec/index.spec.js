@@ -22,8 +22,19 @@ describe('createTable', () => {
   describe('viewVisitor', () => {
   it('should select items from the table', async (done) => {
     const res = await viewVisitor(1);
-    console.log(Object.values(res[0]));
+    //console.log(Object.values(res[0]));
     expect(res).toEqual([{ id: 1, visitor_name: 'Tadiwa Zingoni', visitor_age: 21, date_of_visit: '2020-02-10', time_of_visit: '11:30:00', assistant: 'Melusi', comments: 'No comments' }]);
     done();
   })
   });
+
+  describe('viewAllVisitors', () => {
+    it('should display visitor id and name', async (done) => {
+      const res = await viewAllVisitors();
+      expect(res).toEqual( [ { id: 1, visitor_name: 'Tadiwa Zingoni' } ]);
+      done();
+    });
+
+  });
+
+  describe

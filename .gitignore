@@ -1,2 +1,3 @@
-*/.yaml
-./node_modules
+*./yaml
+node_modules
+gitignore
