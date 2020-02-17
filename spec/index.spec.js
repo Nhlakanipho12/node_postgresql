@@ -3,28 +3,32 @@ const {createTable,addNewVisitor,viewAllVisitors,updateVisitor,deleteVisitor,vie
 
 describe('bd', () => {
   //drops a table if it exixts, then create a new one
-  beforeAll(async function() {
-    await createTable();
-
+  beforeAll(async function(done) {
+    await createTable('visitors');
+    done();
 
   });
-  afterEach(async function() {
-    await addNewVisitor();
-    await viewVisitor();
+  afterEach(async function(done) {
+    await addNewVisitor('Tadiwa Zingoni',21,'2020-02-10','11:30','Melusi','No comments');
+    await viewVisitor(1);
     await viewAllVisitors();
+    done();
   });
 
-  afterAll( async function() {
+  afterAll( async function(done) {
     await deleteVisitor();
     await deleteAllVisitors();
+    done()
+  });
 
   });
 
-    //inserts data to the newly created table
+//inserts data to the newly created table
     describe('addNewVisitor', () => {
 
       it('should insert and save data into the table', async (done) => {
         const res = await addNewVisitor('Tadiwa Zingoni',21,'2020-02-10','11:30','Melusi','No comments');
+        //const moreRes = await addNewVisitor('Thulani Khoza',21,'2020-02-10','11:30','Melusi','No comments');
         expect(Object.values(res[0])).toContain('Tadiwa Zingoni',21,'2020-02-10','11:30','Melusi','No comments');
         done();
       });
@@ -34,7 +38,7 @@ describe('bd', () => {
     describe('viewVisitor', () => {
     it('should select user id and display visitor info  from the table', async (done) => {
       const res = await viewVisitor(1);
-      expect(res).toEqual([{ id: 1, visitor_name: 'Tadiwa Zingoni', visitor_age: 21, date_of_visit: '2020-02-10', time_of_visit: '11:30:00', assistant: 'Melusi', comments: 'No comments' }]);
+      expect(res).toEqual([{ id: 1, visitor_name: 'Senzo Meyiwa', visitor_age: 21, date_of_visit: '2020-02-10', time_of_visit: '11:30:00', assistant: 'Melusi', comments: 'No comments' }]);
       done();
     })
     });
@@ -71,7 +75,3 @@ describe('bd', () => {
         done();
       });
     });
-
-
-  });
-

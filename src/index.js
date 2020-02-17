@@ -88,10 +88,10 @@ const deleteAllVisitors = async  () =>{
     client.release();
     return res;
 }
-  //createTable('visitors');
+  createTable('visitors');
   //dropTable('visitors');
   //viewAllVisitors();
-  //addNewVisitor('Thulani Khoza',21,'2020-02-10','11:30','Melusi','No comments');
+  addNewVisitor('Thulani Khoza',21,'2020-02-10','11:30','Melusi','No comments');
   //updateVisitor(3,'Letsi Hadebe',30,'2020-02-10','10:30','Melusi','No comments')
     // .then(data => console.log(data))
     // .catch(err => console.log(err))
