@@ -10,7 +10,7 @@ describe('bd', () => {
   });
   afterEach(async function(done) {
     await addNewVisitor('Tadiwa Zingoni',21,'2020-02-10','11:30','Melusi','No comments');
-    await viewVisitor(1);
+    await viewVisitor();
     await viewAllVisitors();
     done();
   });
