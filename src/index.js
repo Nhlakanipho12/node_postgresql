@@ -86,18 +86,8 @@ const deleteAllVisitors = async  () =>{
     const res = await pool.query(query_str);
     console.log('All data has been deleted.');
     client.release();
-    return res;
+    return res.rowCount;
 }
-  createTable('visitors');
-  //dropTable('visitors');
-  //viewAllVisitors();
-  addNewVisitor('Thulani Khoza',21,'2020-02-10','11:30','Melusi','No comments');
-  //updateVisitor(3,'Letsi Hadebe',30,'2020-02-10','10:30','Melusi','No comments')
-    // .then(data => console.log(data))
-    // .catch(err => console.log(err))
-  //deleteVisitor('Philasane Mkhabela');
-  //viewVisitor(1);
-  //deleteAllVisitors();
 
   module.exports = {
     createTable,
